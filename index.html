@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <link rel="stylesheet" type="text/css" href="css.css">
+</head>
+<body>
+
+<div class="main">
+    <div class="center">
+        <div class="text">
+            <h1 id="title">marvin</h1>
+            <h2 id="title2">sound of ocean</h2>
+        </div>
+
+        <div class="c-img">
+            <img src="imgq1.jpg" class="img">
+            </div>
+
+            <audio src="music1.mp3" loop></audio>
+
+             <div class="proc" id="pro_con">
+             <div id="pro"></div>
+             </div>
+
+
+            <div class="controls">
+                <i class="fas fa-backward  fa-lg" id="pre" title="previos" ></i>
+                <i class="fas fa-play-circle fa-3x" id="play" title="play"></i>
+                <i class="fas fa-forward fa-lg" id="nex" title="Next"></i>
+            </div>
+
+    </div>
+</div>
+
+<script>
+const title = document.getElementById('title');
+const nex = document.getElementById('nex');
+const pre = document.getElementById('pre');
+const title2 = document.getElementById('title2');
+const img = document.querySelector('img');
+const music = document.querySelector('audio');
+const play = document.getElementById('play');
+const pro_con = document.getElementById('pro_con');
+let pro = document.getElementById('pro');
+
+const songs = [
+   {
+   name:"music1",
+   imgq:"imgq1",
+   title:"marvin",
+   title2:"sound of ocean",
+   },
+   {
+   name:"music2",
+   imgq:"imgq2",
+   title:"Louiest",
+   title2:"Sound of image",
+   },
+];
+
+let playm= false;
+const play_music = () => {
+    playm= true;
+    music.play();
+    play.classList.replace("fa-play-circle","fa-pause-circle");
+    img.classList.add("rotate");
+};
+
+
+
+const pause_music = () => {
+    playm= false;
+    music.pause();
+    play.classList.replace("fa-pause-circle","fa-play-circle");
+    img.classList.remove("rotate");
+};
+
+play.addEventListener('click', () => {
+      playm? pause_music(): play_music();
+});
+
+const loadsong = (songs) =>{
+     title.textContent = songs.title;
+     title2.textContent = songs.title2;
+     music.src = songs.name + ".mp3";
+     img.src = songs.imgq + ".jpg";
+};
+
+songIndex=0;
+const nextsong = () =>{
+    songIndex = (songIndex + 1) % songs.length;
+    loadsong(songs[songIndex]);
+    music.pause();
+    play_music()
+}
+
+const presong = () =>{
+    songIndex = (songIndex - 1 + songs.length) % songs.length;
+    loadsong(songs[songIndex]);
+    play_music()
+    music.play();
+}
+
+music.addEventListener('timeupdate', (event) =>{
+    const {currentTime , duration} = event.srcElement;
+    let progress_time = (currentTime / duration) * 100;
+    pro.style.width = `${progress_time}%` ;
+});
+
+pro_con.addEventListener('click', (event) =>{
+    const {duration} = music;
+    let move_progress = (event.offsetX / event.srcElement.clientWidth) * duration; 
+    music.currentTime = move_progress;
+    play_music()
+});
+
+nex.addEventListener('click',nextsong);
+pre.addEventListener('click',presong);
+
+</script>
+
+</body>
+</html>

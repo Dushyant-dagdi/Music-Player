@@ -12,6 +12,13 @@
 
 <div class="main">
     <div class="center">
+
+    <div id="theam">
+        <div id="t1" title="White Them"></div>
+        <div id="t2" title="Pink Them"></div>
+        <div id="t3" title="Blue Them"></div>
+    </div>
+
         <div class="text">
             <h1 id="title">marvin</h1>
             <h2 id="title2">sound of ocean</h2>
@@ -38,7 +45,10 @@
 </div>
 
 <script>
-const title = document.getElementById('title');
+const icon1 = document.getElementById('t1');
+const icon2 = document.getElementById('t2');
+const icon3 = document.getElementById('t3');
+const title1 = document.getElementById('title');
 const nex = document.getElementById('nex');
 const pre = document.getElementById('pre');
 const title2 = document.getElementById('title2');
@@ -52,13 +62,13 @@ const songs = [
    {
    name:"music1",
    imgq:"imgq1",
-   title:"marvin",
+   title1:"marvin",
    title2:"sound of ocean",
    },
    {
    name:"music2",
    imgq:"imgq2",
-   title:"Louiest",
+   title1:"Louiest",
    title2:"Sound of image",
    },
 ];
@@ -85,7 +95,7 @@ play.addEventListener('click', () => {
 });
 
 const loadsong = (songs) =>{
-     title.textContent = songs.title;
+     title1.textContent = songs.title1;
      title2.textContent = songs.title2;
      music.src = songs.name + ".mp3";
      img.src = songs.imgq + ".jpg";
@@ -121,6 +131,76 @@ pro_con.addEventListener('click', (event) =>{
 
 nex.addEventListener('click',nextsong);
 pre.addEventListener('click',presong);
+
+icon1.onclick = function() {
+      document.body.classList.add('white_them');
+      document.body.classList.remove('pink_them');
+      document.body.classList.remove('blue_them');
+      icon1.style.backgroundColor = 'black' ;
+};
+
+icon2.onclick = function() {
+      document.body.classList.add('pink_them');
+      document.body.classList.remove('white_them');
+      document.body.classList.remove('blue_them');
+      icon1.style.backgroundColor = 'rgb(221, 221, 221)' ;
+};
+
+icon3.onclick = function() {
+      document.body.classList.add('blue_them');
+      document.body.classList.remove('pink_them');
+      document.body.classList.remove('white_them');
+      icon1.style.backgroundColor = 'rgb(221, 221, 221)' ;
+};
+
+icon1.addEventListener('mouseover',() =>{
+    icon2.style.marginLeft = "10px" ;
+});
+icon1.addEventListener('mouseout',() =>{
+    icon2.style.marginLeft = "8px" ;
+});
+
+icon1.addEventListener('mouseover',() =>{
+    icon3.style.marginLeft = "26px" ;
+});
+icon1.addEventListener('mouseout',() =>{
+    icon3.style.marginLeft = "24px" ;
+});
+
+
+
+
+icon2.addEventListener('mouseover',() =>{
+    icon1.style.marginLeft = "-10px" ;
+});
+icon2.addEventListener('mouseout',() =>{
+    icon1.style.marginLeft = "-8px" ;
+});
+
+icon2.addEventListener('mouseover',() =>{
+    icon3.style.marginLeft = "27px" ;
+    icon3.style.top = "4px" ;
+});
+icon2.addEventListener('mouseout',() =>{
+    icon3.style.marginLeft = "24px" ;
+});
+
+
+
+
+icon3.addEventListener('mouseover',() =>{
+    icon1.style.marginLeft = "-10px" ;
+});
+icon3.addEventListener('mouseout',() =>{
+    icon1.style.marginLeft = "-8px" ;
+});
+
+icon3.addEventListener('mouseover',() =>{
+    icon2.style.marginLeft = "5px" ;
+});
+icon3.addEventListener('mouseout',() =>{
+    icon2.style.marginLeft = "8px" ;
+});
 
 </script>
 
